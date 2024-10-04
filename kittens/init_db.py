@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 def run():
 
     try:
-        fixture_path = os.path.join(os.path.dirname(__file__), "fixtures", "initial_data.json")
+        fixture_path = os.path.join(os.path.dirname(__file__), "kittens", "fixtures", "initial_data.json")
         print(f"Loading fixtures from: {fixture_path}")
         call_command("loaddata", fixture_path)
         print("Fixtures loaded successfully.")
