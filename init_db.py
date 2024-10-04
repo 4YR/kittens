@@ -2,18 +2,16 @@ import os
 from django.core.management import call_command
 from django.contrib.auth import get_user_model
 
-
 def run():
-
-    user_fixture_path = os.path.join(
-        os.path.dirname(__file__), "fixtures", "users.json"
-    )
-    kitten_fixture_path = os.path.join(
-        os.path.dirname(__file__), "fixtures", "kittens.json"
-    )
+    breed_fixture_path = os.path.join("kittens", "fixtures", "breeds.json")
+    user_fixture_path = os.path.join("kittens", "fixtures", "users.json")
+    kitten_fixture_path = os.path.join("kittens", "fixtures", "kittens.json")
 
     try:
-
+        print(f"Loading breed fixtures from: {breed_fixture_path}")
+        call_command("loaddata", breed_fixture_path)
+        print("Breed fixtures loaded successfully.")
+    
         print(f"Loading user fixtures from: {user_fixture_path}")
         call_command("loaddata", user_fixture_path)
         print("User fixtures loaded successfully.")
@@ -32,7 +30,6 @@ def run():
         print(f'Superuser "{username}" created successfully.')
     else:
         print(f'Superuser "{username}" already exists.')
-
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cats.settings")

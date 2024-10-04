@@ -21,7 +21,8 @@ services:
     depends_on:
       - db
     command: >
-      sh -c "python manage.py migrate &&
+      sh -c "sleep 10 &&
+              python manage.py migrate &&
               python init_db.py &&  
               python manage.py runserver 0.0.0.0:8000"
 
