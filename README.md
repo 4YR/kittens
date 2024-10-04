@@ -51,12 +51,12 @@
 Чтобы запустить тесты с помощью pytest, выполните следующие шаги:
 
 1. Откройте терминал и выполните команду:
-```bash
-docker ps
+   ```bash
+   docker ps
 2. Скопируйте CONTAINER ID для контейнера web.
 3. Введите команду:
-```bash
-docker exec -it <скопированный ID> sh
+    ```bash
+    docker exec -it <скопированный ID> sh
 4. Внутри контейнера выполните:
-```bash
-pytest
+    ```bash
+    pytest
