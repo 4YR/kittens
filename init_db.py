@@ -5,11 +5,22 @@ from django.contrib.auth import get_user_model
 
 def run():
 
+    user_fixture_path = os.path.join(
+        os.path.dirname(__file__), "fixtures", "users.json"
+    )
+    kitten_fixture_path = os.path.join(
+        os.path.dirname(__file__), "fixtures", "kittens.json"
+    )
+
     try:
-        fixture_path = os.path.join(os.path.dirname(__file__), "kittens", "fixtures", "initial_data.json")
-        print(f"Loading fixtures from: {fixture_path}")
-        call_command("loaddata", fixture_path)
-        print("Fixtures loaded successfully.")
+
+        print(f"Loading user fixtures from: {user_fixture_path}")
+        call_command("loaddata", user_fixture_path)
+        print("User fixtures loaded successfully.")
+
+        print(f"Loading kitten fixtures from: {kitten_fixture_path}")
+        call_command("loaddata", kitten_fixture_path)
+        print("Kitten fixtures loaded successfully.")
     except Exception as e:
         print(f"Error loading fixtures: {e}")
 

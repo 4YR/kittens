@@ -16,4 +16,4 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["python", "kittens/init_db.py"]
+CMD ["python", "init_db.py"]
