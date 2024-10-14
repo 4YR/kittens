@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from kittens.models import Breed, Kitten, Rating
+from src.kittens.models import Breed, Kitten, Rating
 
 
 class BreedSerializer(serializers.ModelSerializer):
