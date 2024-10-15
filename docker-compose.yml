@@ -15,18 +15,19 @@ services:
   web:
     build: .
     volumes:
-      - .:/app/src  
+      - ./src:/app 
     ports:
       - "8000:8000"
     depends_on:
       - db
     environment:
-      - DJANGO_SETTINGS_MODULE=cats.settings
+      - DJANGO_SETTINGS_MODULE=cats.settings 
     command: >
       sh -c "sleep 10 &&
-              python src/manage.py migrate &&
-              python src/init_db.py &&  
-              python src/manage.py runserver 0.0.0.0:8000"
+              python manage.py migrate &&
+              python manage.py load_fixtures &&  
+              python manage.py runserver 0.0.0.0:8000"
 
 volumes:
   postgres_data:
+
