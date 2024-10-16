@@ -5,6 +5,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from kittens.models import Breed, Kitten, Rating
 from kittens.serializer import BreedSerializer, KittenDetailSerializer, KittenSerializer
+from .permissions import IsOwner
 
 
 class BreedViewSet(viewsets.ReadOnlyModelViewSet):
@@ -15,7 +16,7 @@ class BreedViewSet(viewsets.ReadOnlyModelViewSet):
 class KittenViewSet(viewsets.ModelViewSet):
     queryset = Kitten.objects.all()
     serializer_class = KittenSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwner]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -33,15 +34,9 @@ class KittenViewSet(viewsets.ModelViewSet):
         return queryset
 
     def perform_destroy(self, instance):
-        if instance.owner != self.request.user:
-            raise PermissionDenied("Вы можете удалить только своих собственных котят.")
-        instance.delete()
+        return super().perform_destroy(instance)
 
     def perform_update(self, serializer):
-        if serializer.instance.owner != self.request.user:
-            raise PermissionDenied(
-                "Вы можете редактировать только своих собственных котят."
-            )
         super().perform_update(serializer)
 
     @action(detail=True, methods=["post"])
